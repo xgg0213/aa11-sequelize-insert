@@ -25,7 +25,21 @@ app.get('/puppies', async (req, res, next) => {
 // Respond to the request by sending a success message
 app.post('/puppies/build', async (req, res, next) => {
     // Your code here 
-    
+    const {name, ageYrs, breed, weightLbs, microchipped} = req.body;
+    const newPuppy = await Puppy.build({
+        name: name,
+        ageYrs: ageYrs,
+        breed: breed,
+        weightLbs: weightLbs,
+        microchipped: microchipped
+    });
+
+    await newPuppy.save();
+
+    res.json({
+        message: 'successfully inserted new puppy',
+        data: newPuppy
+    })
 })
 
 // STEP 2
@@ -35,6 +49,19 @@ app.post('/puppies/build', async (req, res, next) => {
 // Respond to the request by sending a success message
 app.post('/puppies/create', async (req, res, next) => {
     // Your code here 
+    const {name, ageYrs, breed, weightLbs, microchipped} = req.body;
+    const newPuppy = await Puppy.create({
+        name: name,
+        ageYrs: ageYrs,
+        breed: breed,
+        weightLbs: weightLbs,
+        microchipped: microchipped
+    });
+
+    res.json({
+        message: 'successfully inserted new puppy',
+        data: newPuppy
+    })
 })
 
 
